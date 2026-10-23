@@ -1,0 +1,258 @@
+================================================================================
+REFERENCE — Pi extensions, skills, and upstream repos
+================================================================================
+Generated 2026-10-22, read from disk (settings.json, skill dirs, package.json).
+Host: Windows · Pi 1.3.0 · config: ~/.pi/agent/settings.json
+
+Path legend
+  A = ~/.agents/skills        portable, shared across agents
+  P = ~/.pi/agent/skills      pi-local
+  E = ~/.pi/agent/git/github.com/amirulaliffcherahim/<repo>
+  N = ~/.pi/agent/npm/node_modules/<pkg>
+
+Totals: 12 skills · 13 extensions · 18 live commands · 14 agent tools
+
+
+================================================================================
+1. pi-skill-plus — skills we authored
+================================================================================
+
+--- .agents/skills (8) ---------------------------------------------------------
+
+NAME                 FILES   ORIGIN                    UPSTREAM
+code-quality          7 md   merged 2 skills            HoangNguyen0403/agent-skills-standard (MIT)
+                     +LIC    see §4 naming map
+
+  What: mode gate (test-first vs regression-first vs mechanical) -> read
+  neighbourhood -> design rules -> test intent record -> bounded
+  RED/GREEN/REFACTOR -> bug-fix path -> non-negotiables -> finish report.
+  Refs: design-rules, testing, test-anti-patterns, aaa, test-runners, sources.
+
+zeroday-compliance    16 md   merged 3 skills            mukul975/Anthropic-Cybersecurity-Skills (Apache-2.0)
+                    +3 LIC   see §4 naming map           patrikherak/llm-privacy (MIT)
+                   +script                            benavlabs/vibe-check (MIT)
+                                                      HoangNguyen0403/agent-skills-standard (MIT)
+
+  What: day-zero launch gate. 8 phases, BLOCK/HOLD/PASS verdict, adversarial
+  test matrix. Refs: checklist, data-and-pii, legal, appsec, infra, tooling,
+  frameworks, scan-patterns, mobile, remediation, pii-masking, pii-locales,
+  audit-standards, audit-procedures, sources. Script: llm_privacy.py (PII
+  mask/restore, unmodified upstream).
+
+  Web sources mined: vibeaudits.com/blog/vibe-coded-app-security-checklist
+                     blog.vibecoder.me/gdpr-compliance-vibe-coded-apps
+                     securitywall.co/blog/vibe-coding-security-checklist
+                     launchreadycode.com/blog/vibe-coding-compliance-checklist
+
+system-design          6 md   merged 2 skills            ByteByteGoHq/system-design-101
+                     +LIC    see §4 naming map           donnemartin/system-design-primer
+                                                      binhnguyennus/awesome-scalability
+                                                      microsoft/api-guidelines
+                                                      zalando/restful-api-guidelines
+                                                      public-apis/public-apis
+                                                      HoangNguyen0403/agent-skills-standard (MIT)
+
+  What: 5-step design loop (requirements -> numbers -> components -> contract
+  -> failure modes), decision tables, two API convention bundles (Zalando /
+  Azure), review table. Refs: scaling-and-reliability, api-design,
+  data-modelling, design-walkthrough, sources.
+
+surgical-patch         1 md   original                   none
+  What: minimal-diff fix at narrowest responsible layer, regression proof.
+
+verify-and-stop        1 md   original                   none
+  What: prove acceptance without scope creep. Validation-only tasks.
+
+ai-workflow-signals    1 md   original                   none
+  What: community agent-workflow patterns. Explicit request only.
+
+arxiv-30d-research     1 md   original                   none
+  What: last-30-day AI papers. Explicit request only.
+
+github-trends-scout    1 md   original                   none
+  What: trending repos. Explicit request only.
+
+
+--- .pi/agent/skills (4) -------------------------------------------------------
+
+NAME                 FILES   ORIGIN                    UPSTREAM
+docs-write            11 md   custom                    mattpocock/skills (writing-for-agents, MIT)
+                                                      riekelt/technical-writer
+                                                      tercel/spec-forge
+  What: SRS, SDS, PRD, ADR, test plan, README, API docs, prose, agent docs.
+  Not for code changes or UI copy.
+
+ui-design              9 md   custom                    nextlevelbuilder/ui-ux-pro-max-skill
+                     +LIC                             pbakaus/impeccable
+                                                      thedaviddias/Front-End-Checklist
+                                                      VoltAgent/awesome-design-md
+  What: UI build/redesign/review. Layout, type, colour, motion, a11y,
+  responsive, Apple HIG.
+
+diagram-design        65 md   custom                    simple-icons/simple-icons
+                     +LIC                             tabler/tabler-icons
+                                                      devicons/devicon
+                                                      log-z/logos
+                                                      google/fonts (Instrument Serif OFL)
+  What: every diagram type as HTML/SVG/PNG, plus drawio/Mermaid/Excalidraw
+  import. Large asset + reference set.
+
+reverse-engineer       8 md   custom                    morluto/rea (docs: binary-diagnostics,
+                                                      ghidra-nativeaot, javascript-recovery,
+                                                      mcp-contracts, recorded-crashes,
+                                                      rust-binaries, sqlite-databases...)
+  What: Ghidra + REA MCP/CLI, Ghidra headless fallback. Native, .NET,
+  Electron/JS, Android, firmware, packaged, browser targets.
+
+
+================================================================================
+2. Extensions installed (13)
+================================================================================
+
+NAME              SOURCE                                                     VER
+pi-advise         git:github.com/amirulaliffcherahim/pi-advise              —   (pkg name: pi-advice)
+  CMDS  /advise  /discuss            TOOLS  advise, discuss
+  Notes /advise [model, caveman on|off, --act] · /discuss [model, agents, rounds, --session]
+
+pi-web-access     npm:pi-web-access · github.com/nicobailon/pi-web-access   0.43.0
+  CMDS  /search  /websearch  /curator  /google-account
+  TOOLS web_search, fetch_content, get_search_content
+
+pi-memory         npm:pi-memory · github.com/jayzeng/pi-memory               0.4.2
+  CMDS  none
+  TOOLS memory_read, memory_search, memory_write, scratchpad
+
+rpiv-todo         npm:@juicesharp/rpiv-todo · github.com/juicesharp/rpiv-mono 2.13.9
+  CMDS  /todos                        TOOLS  todo
+
+rpiv-ask-user     npm:@juicesharp/rpiv-ask-user-question · same monorepo     2.13.9
+  CMDS  none                          TOOLS  ask_user_question
+
+pi-simplify       npm:pi-simplify · github.com/MattDevy/pi-extensions        0.2.3
+  CMDS  /simplify                     TOOLS  none
+
+pi-footer         npm:@henryqw/pi-footer · github.com/HenryQW/pi-harness     5.1.4
+  CMDS  /open  /set-open-in           TOOLS  none
+
+pi-token          git:github.com/amirulaliffcherahim/pi-token               —
+  CMDS  /token  /token-daemon          TOOLS  none
+
+pi-agy            git:github.com/amirulaliffcherahim/pi-agy                  —
+  CMDS  /agy-doctor  /agy-usage  /generate    TOOLS  none
+
+pi-claude         git:github.com/amirulaliffcherahim/pi-claude               —
+  CMDS  /claude-doctor  /claude-usage        TOOLS  none
+
+pi-playwright     git:github.com/amirulaliffcherahim/pi-playwright           —
+  CMDS  /playwright                           TOOLS  playwright / browser_* family
+
+pi-terminal-plus  git:github.com/amirulaliffcherahim/pi-terminal-plus       0.2.0
+  CMDS  none
+  TOOLS convert_to_markdown + tool trimming (enforces read-before-edit guard)
+
+pi-worker         git:github.com/amirulaliffcherahim/pi-worker              DISABLED
+  settings entry has "extensions": [] — loads nothing.
+  20 dormant commands: /lead /worker /worker-run /worker-steer /worker-stop
+  /worker-detach /worker-fleet /worker-doctor /worker-cost /worker-models
+  /worker-profiles /worker-load-profile /worker-check-profile
+  /worker-generate-profiles /worker-refine /worker-guide /worker-inspect-rpc
+  /worker-prompt-workflow /worker-refresh-provider-models /pi-worker-bridge
+
+REMOVED (2026-10-22)
+pi-compliance     was git:github.com/amirulaliffcherahim/pi-compliance
+  Dropped: needs SUBQ_API_KEY (never set), gave /compliance status + ask_compliance
+  YES/NO gate. Superseded by the zeroday-compliance skill — offline, no key.
+  Clone deleted; copy in ~/.pi/agent/extensions-backup/pi-compliance.
+  Restore: pi install git:github.com/amirulaliffcherahim/pi-compliance
+
+No extension ships a skill: every package declares "skills": [] or has no skill
+dir. All 12 skills come from the two skill directories above.
+
+
+================================================================================
+3. Upstream repos, aggregated
+================================================================================
+
+Skills / harness
+  https://github.com/HoangNguyen0403/agent-skills-standard       MIT    code-quality, system-design, zeroday
+  https://github.com/patrikherak/llm-privacy                     MIT    PII mask/restore script
+  https://github.com/mukul975/Anthropic-Cybersecurity-Skills     Apache compliance frameworks (SOC2/GDPR/HIPAA/PCI)
+  https://github.com/mattpocock/skills                           MIT    docs-write (writing-for-agents)
+  https://github.com/riekelt/technical-writer                           docs-write
+  https://github.com/tercel/spec-forge                                  docs-write
+  https://github.com/benavlabs/vibe-check                        MIT    zeroday (17 vuln categories + scanner)
+
+System design
+  https://github.com/ByteByteGoHq/system-design-101                     system-design (component diagrams)
+  https://github.com/donnemartin/system-design-primer                   system-design (latency/availability, worked designs)
+  https://github.com/binhnguyennus/awesome-scalability                  system-design (symptom->pattern taxonomy)
+  https://github.com/microsoft/api-guidelines                           system-design (Azure REST conventions)
+  https://github.com/zalando/restful-api-guidelines                     system-design (rule-numbered REST catalog)
+  https://github.com/public-apis/public-apis                             system-design (API catalogue, no rules)
+
+UI / diagrams / RE
+  https://github.com/nextlevelbuilder/ui-ux-pro-max-skill                ui-design
+  https://github.com/pbakaus/impeccable                                  ui-design
+  https://github.com/thedaviddias/Front-End-Checklist                    ui-design
+  https://github.com/VoltAgent/awesome-design-md                         ui-design (DESIGN.md corpus)
+  https://github.com/simple-icons/simple-icons                           diagram-design (icons)
+  https://github.com/tabler/tabler-icons                                 diagram-design (icons)
+  https://github.com/devicons/devicon                                    diagram-design (icons)
+  https://github.com/log-z/logos                                         diagram-design (brand logos)
+  https://github.com/google/fonts                                        diagram-design (Instrument Serif OFL)
+  https://github.com/morluto/rea                                         reverse-engineer (REA + Ghidra docs)
+
+Extensions
+  https://github.com/amirulaliffcherahim/pi-advise
+  https://github.com/amirulaliffcherahim/pi-token
+  https://github.com/amirulaliffcherahim/pi-agy
+  https://github.com/amirulaliffcherahim/pi-claude
+  https://github.com/amirulaliffcherahim/pi-playwright
+  https://github.com/amirulaliffcherahim/pi-terminal-plus
+  https://github.com/amirulaliffcherahim/pi-worker
+  https://github.com/amirulaliffcherahim/pi-compliance                   (removed)
+  https://github.com/nicobailon/pi-web-access
+  https://github.com/jayzeng/pi-memory
+  https://github.com/juicesharp/rpiv-mono                               (rpiv-todo, rpiv-ask-user-question)
+  https://github.com/MattDevy/pi-extensions                              (pi-simplify)
+  https://github.com/HenryQW/pi-harness                                  (pi-footer)
+
+Compliance reading (web, not repos)
+  https://vibeaudits.com/blog/vibe-coded-app-security-checklist
+  https://blog.vibecoder.me/gdpr-compliance-vibe-coded-apps
+  https://securitywall.co/blog/vibe-coding-security-checklist
+  https://launchreadycode.com/blog/vibe-coding-compliance-checklist
+  https://www.pdp.gov.my                              Malaysia PDPA: Act 709, Act A1727, DBN + DPO guidelines
+  https://ai-act-service-desk.ec.europa.eu            EU AI Act timeline, Art 50
+
+
+================================================================================
+4. Naming map — merged-away skills
+================================================================================
+
+  common-best-practices  +  common-tdd
+      -> code-quality
+
+  common-api-design      +  common-database-design
+      -> system-design
+
+  common-compliance      +  common-privacy-pii  +  common-security-audit
+      -> zeroday-compliance
+
+Backups of every pre-merge skill:
+  ~/.pi/agent/backups/skills-merged-2026-10-22.tgz              (api + database)
+  ~/.pi/agent/backups/skills-merged-2026-10-22-code-quality.tgz (best-practices + tdd)
+  ~/.pi/agent/backups/skills-merged-2026-10-22-compliance.tgz   (compliance + privacy + security)
+
+
+================================================================================
+5. Stale copies — not live, do not trust
+================================================================================
+
+  Local/Code/Pi-Extension/pi-setup/skills/          18 dirs incl. 5 merged-away skills
+  Local/Code/Pi-Extension/pi-setup/CAPABILITY_SKILL_PACK.md
+                                                    rows + "slow SQL -> common-database-design" probe
+  ~/.pi/agent/snapshot-of-pi-customization/         same snapshot, mirrored
+  ~/.pi/agent/extensions-backup/pi-compliance/      removed extension backup
+
+Live truth: ~/.agents/skills, ~/.pi/agent/skills, ~/.pi/agent/settings.json.

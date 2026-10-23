@@ -1,0 +1,25 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+
+# PII masking tool artefacts — the vault holds real personal data, never commit it
+*llm_privacy*vault*
+.vault
+*.vault
+
+# Local overrides and secrets
+.env*
+*.local
